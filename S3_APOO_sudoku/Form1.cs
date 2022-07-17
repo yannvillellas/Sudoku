@@ -47,15 +47,18 @@ namespace S3_APOO_sudoku
         private void Cell_Key_Pressed(object? sender, KeyPressEventArgs e)
         {
             var cell = sender as SudokuCell;
-            if (cell.isLocked) //do nothing if the cell is locked
-                return;
-            if (int.TryParse(e.KeyChar.ToString(), out int value)) //add the pressed key value in the cell only if it is a number
+            if (cell != null)
             {
-                if (value == 0) //clear the cell value if pressed key is zero
-                    cell.Clear();
-                else
-                    cell.Text = value.ToString();
-                cell.ForeColor = SystemColors.ControlDarkDark;
+                if (cell.isLocked) //do nothing if the cell is locked
+                    return;
+                if (int.TryParse(e.KeyChar.ToString(), out int value)) //add the pressed key value in the cell only if it is a number
+                {
+                    if (value == 0) //clear the cell value if pressed key is zero
+                        cell.Clear();
+                    else
+                        cell.Text = value.ToString();
+                    cell.ForeColor = SystemColors.ControlDarkDark;
+                }
             }
         }
         private void Load_Values()
@@ -128,15 +131,15 @@ namespace S3_APOO_sudoku
         }
         private void Show_Random_Values_Hints(int hintsCount)
         {
-            // Show value in random cells
-            // The hints count is based on the level player choose
+            //show value in random cells
+            //the hints count is based on the level player choose
             for (int i = 0; i < hintsCount; i++)
             {
                 var rX = random.Next(9);
                 var rY = random.Next(9);
 
-                // Style the hint cells differently and
-                // lock the cell so that player can't edit the value
+                //style the hint cells differently and
+                //lock the cell so that player can't edit the value
                 cells[rX, rY].Text = cells[rX, rY].value.ToString();
                 cells[rX, rY].ForeColor = Color.Black;
                 cells[rX, rY].isLocked = true;
@@ -146,7 +149,7 @@ namespace S3_APOO_sudoku
         {
             var wrongCells = new List<SudokuCell>();
 
-            // Find all the wrong inputs
+            //find all the wrong inputs
             foreach (var cell in cells)
             {
                 if (!string.Equals(cell.value.ToString(), cell.Text))
@@ -155,10 +158,10 @@ namespace S3_APOO_sudoku
                 }
             }
 
-            // Check if the inputs are wrong or the player wins 
+            //check if the inputs are wrong or the player wins 
             if (wrongCells.Any())
             {
-                // Highlight the wrong inputs 
+                //highlight the wrong inputs 
                 wrongCells.ForEach(x => x.ForeColor = Color.Red);
                 MessageBox.Show("Wrong inputs");
             }
@@ -171,7 +174,7 @@ namespace S3_APOO_sudoku
         {
             foreach (var cell in cells)
             {
-                // Clear the cell only if it is not locked
+                //clear the cell only if it is not locked
                 if (cell.isLocked == false)
                     cell.Clear();
             }
