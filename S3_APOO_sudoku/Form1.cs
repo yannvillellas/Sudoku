@@ -13,7 +13,7 @@ namespace S3_APOO_sudoku
             Create_Cells();
             Start_New_Game();
         }
-        SudokuCell[,] cells = new SudokuCell[9, 9];
+        Cell[,] cells = new Cell[9, 9];
         private void Create_Cells()
         {
             for (int i = 0; i < 9; i++)
@@ -21,7 +21,7 @@ namespace S3_APOO_sudoku
                 for (int j = 0; j < 9; j++)
                 {
                     //create 81 cells for with styles and locations based on the index
-                    cells[i, j] = new SudokuCell
+                    cells[i, j] = new Cell
                     {
                         Font = new Font(SystemFonts.DefaultFont.FontFamily, 20),
                         Size = new Size(40, 40),
@@ -46,7 +46,7 @@ namespace S3_APOO_sudoku
         }
         private void Cell_Key_Pressed(object? sender, KeyPressEventArgs e)
         {
-            var cell = sender as SudokuCell;
+            var cell = sender as Cell;
             if (cell != null)
             {
                 if (cell.isLocked) //do nothing if the cell is locked
@@ -147,7 +147,7 @@ namespace S3_APOO_sudoku
         }
         private void Check_Button_Click(object sender, EventArgs e)
         {
-            var wrongCells = new List<SudokuCell>();
+            var wrongCells = new List<Cell>();
 
             //find all the wrong inputs
             foreach (var cell in cells)
@@ -167,7 +167,7 @@ namespace S3_APOO_sudoku
             }
             else
             {
-                MessageBox.Show("You Wins");
+                MessageBox.Show("You Win");
             }
         }
         private void Clear_Button_Click(object sender, EventArgs e)

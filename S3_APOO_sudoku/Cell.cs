@@ -2,7 +2,7 @@
 
 namespace S3_APOO_sudoku
 {
-    internal class SudokuCell : Button
+    internal class Cell : Button
     {
         public int value { get; set; }
         public bool isLocked { get; set; }
